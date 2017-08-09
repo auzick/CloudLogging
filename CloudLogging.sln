@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudLogging", "CloudLoggin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Scripts", "Build Scripts", "{74FE6B3D-BF38-4777-BDA6-D0619872B7B0}"
 	ProjectSection(SolutionItems) = preProject
-		Build Scripts\ApplyVersionToAssemblies.ps1 = Build Scripts\ApplyVersionToAssemblies.ps1
+		ApplyVersionToAssemblies.ps1 = ApplyVersionToAssemblies.ps1
 	EndProjectSection
 EndProject
 Global

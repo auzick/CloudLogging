@@ -78,6 +78,7 @@
     <Compile Include="StorageHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CloudLogging.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

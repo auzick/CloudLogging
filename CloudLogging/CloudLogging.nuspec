@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>AndyUzick.CloudLogging</id>
+    <id>AndyUzick.AzureAppLogging</id>
     <version>1.0.0.0</version>
-    <title>Cloud Logging</title>
+    <title>Azure App Logging</title>
     <authors>Andy Uzick</authors>
     <owners>Andy Uzick</owners>
+    <projectUrl>https://github.com/auzick/CloudLogging</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Azure storage based application logging library</description>
-    <copyright>Copyright © Andy Uzick 2017</copyright>
+    <description>Library for using Azure Stroage blobs for application logging.</description>
+    <copyright>Copyright © 2017</copyright>
+    <language>en-US</language>
     <dependencies>
       <dependency id="WindowsAzure.Storage" version="7.2.1" />
     </dependencies>

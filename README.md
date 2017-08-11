@@ -1,7 +1,7 @@
 # CloudLogging
 Helper library for using Azure Storage for application logging.
 
-To use this library, you can use this nuget package: https://www.nuget.org/packages/AndyUzick.AzureAppLogging.
+*To use this library, you can use this nuget package: https://www.nuget.org/packages/AndyUzick.AzureAppLogging.*
 
 When building Azure Web Apps, I needed an easy way to log application messages persistently. This library is what I came up with. 
 

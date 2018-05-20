@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Net.Configuration;
+using System.Text;
 using CloudLogging.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -48,7 +51,16 @@ namespace CloudLogging
 
         public void Write(string message)
         {
-            CurrentBlob.AppendText($"{message}{Environment.NewLine}");
+            // Changing this from AppendText to AppendBlob to better manage concurrency
+            // https://stackoverflow.com/questions/32530126/azure-cloudappendblob-errors-with-concurrent-access
+            // CurrentBlob.AppendText($"{message}{Environment.NewLine}");
+
+            var msg = $"{message}{(message.EndsWith(Environment.NewLine) ? string.Empty : Environment.NewLine)}";
+
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes($"{msg}")))
+            {
+                CurrentBlob.AppendBlock(ms);
+            }
         }
 
     }

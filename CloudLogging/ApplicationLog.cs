@@ -42,7 +42,9 @@ namespace CloudLogging
         private bool _isBuffering;
         public bool IsBuffering
         {
-            get => _isBuffering;
+            // VSO build does not like this being an expression body.
+            // Maybe because we removed the reference to Microsoft.CSharp?
+            get { return _isBuffering; }
             set
             {
                 _isBuffering = value;

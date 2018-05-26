@@ -10,23 +10,25 @@ namespace CloudLogging
     public abstract class Log
     {
         private readonly CloudBlobContainer _container;
+        private int _currentLogSequence;
 
-        private int _currentLogSequence = 0;
+        protected Log(CloudStorageAccount account, string logContainerName)
+        {
+            _container = StorageHelper.GetBlobContainer(account, logContainerName);
+        }
+
         private CloudAppendBlob _currentBlob;
-
         protected CloudAppendBlob CurrentBlob
         {
             get
             {
                 if (_currentBlob == null || _currentBlob.Name != GetLogName())
-                {
                     _currentBlob = StorageHelper.GetAppendBlob(_container, GetLogName());
-                }
 
                 while (
                     _currentBlob.Properties.AppendBlobCommittedBlockCount > Settings.MaxLogBlocks
                     && _currentBlob.Properties.Length > Settings.MaxLogSize
-                    )
+                )
                 {
                     _currentLogSequence++;
                     _currentBlob = StorageHelper.GetAppendBlob(_container, GetLogName());
@@ -36,14 +38,9 @@ namespace CloudLogging
             }
         }
 
-        protected Log(CloudStorageAccount account, string logContainerName)
-        {
-            _container = StorageHelper.GetBlobContainer(account, logContainerName);
-        }
-
         protected string GetLogName()
         {
-            var sequence = _currentLogSequence > 0 ? $"-{ _currentLogSequence}" : "";
+            var sequence = _currentLogSequence > 0 ? $"-{_currentLogSequence}" : "";
             var name = $"{DateTime.Now:yyyyMMdd}{sequence}.log";
             return name;
         }
@@ -61,6 +58,5 @@ namespace CloudLogging
                 CurrentBlob.AppendBlock(ms);
             }
         }
-
     }
 }

@@ -6,7 +6,7 @@ namespace CloudLogging
 {
     public static class LogManager
     {
-        private static readonly object _logsLock = new object();
+        private static readonly object LogsLock = new object();
 
         public static IDictionary<string, ILog> Logs;
 
@@ -19,7 +19,7 @@ namespace CloudLogging
         {
             if (string.IsNullOrWhiteSpace(containerName))
                 throw new ArgumentException("Container name must be specified.");
-            lock (_logsLock)
+            lock (LogsLock)
             {
                 if (Logs.ContainsKey(containerName))
                 {

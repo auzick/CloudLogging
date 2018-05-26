@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net.Configuration;
 using System.Text;
 using CloudLogging.Configuration;
 using Microsoft.WindowsAzure.Storage;

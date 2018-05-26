@@ -42,7 +42,7 @@ namespace CloudLogging
         private bool _isBuffering;
         public bool IsBuffering
         {
-            get { return _isBuffering; }
+            get => _isBuffering;
             set
             {
                 _isBuffering = value;
@@ -65,7 +65,7 @@ namespace CloudLogging
 
         protected void WriteLog(Level level, string message)
         {
-            if (!AllowedLevels.Any(l => l == level))
+            if (AllowedLevels.All(l => l != level))
                 return;
 
             if (IsBuffering)
@@ -112,9 +112,12 @@ namespace CloudLogging
             {
                 Buffer.Enqueue(text);
             }
-            if (Buffer.Count >= MaxBufferLength)
+            lock (BufferLock)
             {
-                FlushBuffer();
+                if (Buffer.Count >= MaxBufferLength)
+                {
+                    FlushBuffer();
+                }
             }
         }
 
